@@ -8,20 +8,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed = 1.0f;
 
-    private Vector2 moveVector;
+    [SerializeField]
+    private LightningBolt lightningBoltPrefab;
+
+    private LightningBolt lightningBolt;
+
+    private Vector2 moveVector = Vector2.zero;
 
     private new Rigidbody2D rigidbody;
 
+    // Cache components and create objects.
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        lightningBolt = Instantiate(lightningBoltPrefab);
     }
 
+    // Attempt to move and then try to fire a projectile.
     private void Update()
     {
         CalculateMove();
+        ShootBolt();
     }
 
+    // Calculate the move vector and cache ready for the next FixedUpdate.
     private void CalculateMove()
     {
         var horizontal = Input.GetAxis("Horizontal");
@@ -34,7 +44,32 @@ public class PlayerController : MonoBehaviour
             moveVector.Normalize();
         }
     }
+
+    // Attempt to fire a projectile.
+    private void ShootBolt()
+    {
+        if(Input.GetButtonUp("FireKeyboard"))
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            var direction = mousePos - transform.position;
+
+            lightningBolt.Fire(transform.position, direction / direction.magnitude);
+        }
+        else if(Input.GetButtonUp("FireController"))
+        {
+            Vector2 direction = new Vector2(Input.GetAxis("LookX"), Input.GetAxis("LookY"));
+
+            if (direction == Vector2.zero)
+            {
+                direction = moveVector;
+            }
+
+            lightningBolt.Fire(transform.position, direction / direction.magnitude);
+        }
+    }
     
+    // Move the player according to the value cached by Update.
     private void FixedUpdate()
     {
         rigidbody.velocity = moveVector * speed;

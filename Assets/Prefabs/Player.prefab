@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8121991000824825695}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,7 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67411d00c658dad4286d3a9e54108bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7.5
+  lightningBoltPrefab: {fileID: 8000306625233061685, guid: c271891c5aa00a14988b766977d93108,
+    type: 3}
 --- !u!58 &8121991000824825695
 CircleCollider2D:
   m_ObjectHideFlags: 0
