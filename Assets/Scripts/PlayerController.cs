@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private new Rigidbody2D rigidbody;
 
     // Cache components and create objects.
-    private void Start()
+    private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         lightningBolt = Instantiate(lightningBoltPrefab);
@@ -28,7 +28,11 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         CalculateMove();
-        ShootBolt();
+
+        if(!lightningBolt.gameObject.activeSelf)
+        {
+            ShootBolt();
+        }
     }
 
     // Calculate the move vector and cache ready for the next FixedUpdate.
@@ -73,5 +77,10 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rigidbody.velocity = moveVector * speed;
+    }
+
+    public LightningBolt GetLightningBolt()
+    {
+        return lightningBolt;
     }
 }

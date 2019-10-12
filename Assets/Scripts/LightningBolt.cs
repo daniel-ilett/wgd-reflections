@@ -26,7 +26,7 @@ public class LightningBolt : MonoBehaviour
     //private List<Vector2> positions;
     private Vector2 direction;
 
-    private void Start()
+    private void Awake()
     {
         renderer = GetComponent<LineRenderer>();
         Reset();
@@ -83,7 +83,6 @@ public class LightningBolt : MonoBehaviour
 
                             if (lifetime <= pickupThreshold)
                             {
-                                Debug.Log("Pick up if the timer is at 0.");
                                 Reset();
                                 return;
                             }
@@ -181,5 +180,10 @@ public class LightningBolt : MonoBehaviour
     {
         gameObject.SetActive(false);
         renderer.positionCount = 2;
+    }
+
+    public Vector3 GetHeadPosition()
+    {
+        return renderer.GetPosition(0);
     }
 }
