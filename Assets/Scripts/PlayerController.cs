@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveVector = Vector2.zero;
 
+    private Animator anim;
     private new Rigidbody2D rigidbody;
 
     public static PlayerController instance = null;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         }
 
         rigidbody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         lightningBolt = Instantiate(lightningBoltPrefab);
     }
 
@@ -39,6 +41,16 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         CalculateMove();
+
+        if(moveVector.magnitude > 0.1f)
+        {
+            CalculateFacingDirection();
+            anim.SetBool("IsMoving", true);
+        }
+        else
+        {
+            anim.SetBool("IsMoving", false);
+        }
 
         if(!lightningBolt.gameObject.activeSelf)
         {
@@ -58,13 +70,32 @@ public class PlayerController : MonoBehaviour
         {
             moveVector.Normalize();
         }
-
-        CalculateFacingDirection();
     }
 
     private void CalculateFacingDirection()
     {
-
+        if(Mathf.Abs(moveVector.x) > Mathf.Abs(moveVector.y))
+        {
+            if(moveVector.x < 0.0f)
+            {
+                anim.SetInteger("Direction", 0);
+            }
+            else
+            {
+                anim.SetInteger("Direction", 3);
+            }
+        }
+        else
+        {
+            if(moveVector.y < 0.0f)
+            {
+                anim.SetInteger("Direction", 1);
+            }
+            else
+            {
+                anim.SetInteger("Direction", 2);
+            }
+        }
     }
 
     // Attempt to fire a projectile.
