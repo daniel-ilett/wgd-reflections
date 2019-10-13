@@ -58,6 +58,13 @@ public class PlayerController : MonoBehaviour
         {
             moveVector.Normalize();
         }
+
+        CalculateFacingDirection();
+    }
+
+    private void CalculateFacingDirection()
+    {
+
     }
 
     // Attempt to fire a projectile.

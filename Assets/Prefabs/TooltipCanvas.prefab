@@ -111,3 +111,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba286c22156f234b90ebf24fb08b9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 6359196609000029314, guid: df1892a1add15d34cb04d41fe2b6a6b6,
+    type: 3}
