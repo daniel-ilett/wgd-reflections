@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1365793094, guid: 28755f42e8eb3384fa05e23701825206, type: 3}
+  spriteSheets:
+  - {fileID: -2645222260220940297, guid: 21b6d2286a894a040b6eb9462c299c5d, type: 3}
+  - {fileID: -8344248237123652576, guid: 369188e60b5595d4aa36259a1ed6036e, type: 3}
+  - {fileID: -576006781039431521, guid: 43ce254835563954bb150ab224c1c2a0, type: 3}
+  - {fileID: 4263462626376336218, guid: 9451dc0339e01e441a8f95fcbd043184, type: 3}
+  - {fileID: 241623554521800045, guid: 1f8d7c3f12ac57145be1d739aae1bae9, type: 3}
