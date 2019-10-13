@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveVector = Vector2.zero;
 
     private bool canBeHit = true;
+
+    public static int score;
 
     private Animator anim;
     private new Rigidbody2D rigidbody;
@@ -173,7 +176,8 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Die!!!!!!");
+        score = ScoringSystem.instance.GetScore();
+        SceneManager.LoadScene("GameOver");
     }
 
     private IEnumerator WaitForCanBeHit()

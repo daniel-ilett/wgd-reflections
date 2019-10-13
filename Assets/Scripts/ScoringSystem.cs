@@ -74,4 +74,9 @@ public class ScoringSystem : MonoBehaviour
     {
         scoreDisplay.SetText(totalPoints, 1.0f + enemiesHit * modifier);
     }
+
+    public int GetScore()
+    {
+        return totalPoints;
+    }
 }
