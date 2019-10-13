@@ -17,9 +17,20 @@ public class PlayerController : MonoBehaviour
 
     private new Rigidbody2D rigidbody;
 
+    public static PlayerController instance = null;
+
     // Cache components and create objects.
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         rigidbody = GetComponent<Rigidbody2D>();
         lightningBolt = Instantiate(lightningBoltPrefab);
     }

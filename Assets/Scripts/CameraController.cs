@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
     private PlayerController player;
 
     [SerializeField]
@@ -15,8 +14,11 @@ public class CameraController : MonoBehaviour
 
     private Vector3 targetPos = Vector3.zero;
 
+    // Cache components and set initial target.
     private void Start()
     {
+        player = PlayerController.instance;
+
         lightningBolt = player.GetLightningBolt();
         SetTargetPos(player.transform.position);
     }
@@ -26,6 +28,7 @@ public class CameraController : MonoBehaviour
         SetTargetPos();
     }
 
+    // Move towards the target position.
     private void FixedUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
@@ -45,6 +48,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    // Set the target position, preserving the existing z-component.
     private void SetTargetPos(Vector2 pos)
     {
         targetPos = new Vector3(pos.x, pos.y, transform.position.z);

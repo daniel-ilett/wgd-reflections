@@ -91,7 +91,9 @@ public class LightningBolt : MonoBehaviour
                     case "Enemy":
                         {
                             alreadyHit.Add(hitObject.transform);
-                            Debug.Log("Hurt the enemy.");
+
+                            var enemy = hitObject.transform.GetComponent<EnemyController>();
+                            enemy.GetHit();
                         }
                         break;
                     case "Wall":
