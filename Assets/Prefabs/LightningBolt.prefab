@@ -75,7 +75,7 @@ LineRenderer:
   - {x: 1, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 0.12
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -145,5 +145,5 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxLifetime: 5
-  pickupThreshold: 4.65
+  maxLifetime: 3
+  pickupThreshold: 2.65
