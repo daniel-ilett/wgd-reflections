@@ -9,11 +9,24 @@ public class PlayerController : MonoBehaviour
     private float speed = 1.0f;
 
     [SerializeField]
+    private float hurtAmount = 10.0f;
+
+    [SerializeField]
+    private float immunityPeriod = 0.5f;
+
+    [SerializeField]
+    private float maxHealth = 100.0f;
+
+    private float health;
+
+    [SerializeField]
     private LightningBolt lightningBoltPrefab;
 
     private LightningBolt lightningBolt;
 
     private Vector2 moveVector = Vector2.zero;
+
+    private bool canBeHit = true;
 
     private Animator anim;
     private new Rigidbody2D rigidbody;
@@ -35,6 +48,8 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         lightningBolt = Instantiate(lightningBoltPrefab);
+
+        health = maxHealth;
     }
 
     // Attempt to move and then try to fire a projectile.
@@ -131,5 +146,39 @@ public class PlayerController : MonoBehaviour
     public LightningBolt GetLightningBolt()
     {
         return lightningBolt;
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.tag == "Enemy" && canBeHit)
+        {
+            GetHit();
+        }
+    }
+
+    private void GetHit()
+    {
+        canBeHit = false;
+
+        health -= hurtAmount;
+        HealthBar.instance.SetHealth(health / maxHealth);
+
+        if (health <= 0.0f)
+        {
+            Die();
+        }
+
+        StartCoroutine(WaitForCanBeHit());
+    }
+
+    private void Die()
+    {
+        Debug.Log("Die!!!!!!");
+    }
+
+    private IEnumerator WaitForCanBeHit()
+    {
+        yield return new WaitForSeconds(immunityPeriod);
+        canBeHit = true;
     }
 }
