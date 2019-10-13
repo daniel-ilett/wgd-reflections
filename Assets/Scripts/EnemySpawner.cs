@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     private EnemyController enemyPrefab;
 
     [SerializeField]
-    private List<Sprite> spriteSheets;
+    private List<RuntimeAnimatorController> controllers;
 
     private void Start()
     {
@@ -18,6 +18,6 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy()
     {
         var enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-        enemy.SetSprites(spriteSheets[Random.Range(0, spriteSheets.Count)]);
+        enemy.SetController(controllers[Random.Range(0, controllers.Count)]);
     }
 }

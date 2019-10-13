@@ -64,10 +64,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void SetSprites(Sprite spriteSheet)
+    public void SetController(RuntimeAnimatorController controller)
     {
-        spriteRenderer.sprite = spriteSheet;
-        sprites = spriteSheet;
+        anim.runtimeAnimatorController = controller;
     }
 
     public void GetHit()
