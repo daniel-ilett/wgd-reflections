@@ -67,7 +67,7 @@ public class LightningBolt : MonoBehaviour
 
                             if (lifetime <= pickupThreshold)
                             {
-                                ScoringSystem.instance.CollectBolt();
+                                ScoringSystem.instance.CollectBolt(player.transform.position);
                                 Reset();
                                 return;
                             }

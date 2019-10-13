@@ -38,16 +38,26 @@ public class ScoringSystem : MonoBehaviour
         return increase;
     }
 
-    // When the bolt is collected, 
-    public int CollectBolt()
+    // When the bolt is collected, add bonus points.
+    public int CollectBolt(Vector2 position)
     {
-        int increase = (int)(pointsPerEnemy * (1.0f + enemiesHit * modifier));
-        totalPoints += increase;
-        ResetModifier();
+        if(enemiesHit > 0)
+        {
+            int increase = (int)(pointsPerEnemy * (1.0f + enemiesHit * modifier));
+            totalPoints += increase;
 
-        return increase;
+            TooltipCanvas.instance.CreateTooltip(position, "BONUS" + increase);
+            ResetModifier();
+
+            return increase;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
+    // When the bolt expires, just reset the multiplier.
     public void BoltDeath()
     {
         ResetModifier();
