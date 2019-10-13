@@ -48,22 +48,6 @@ public class LightningBolt : MonoBehaviour
     // The ray hurts enemies and is picked up by the player after a certain time.
     private void FireRay(float distance, List<Transform> alreadyHit)
     {
-        Debug.Log("Firing Ray.");
-        // Forward ray: 
-
-        // Raycast distance of deltaTime * speed in front.
-
-        // If hit enemy: hurt them.
-        // If hit player and cooldown is reached: get collected.
-        // If hit wall: reflect ray and do secondary raycast, 
-        //     ignoring that wall.
-
-        // Backward ray:
-
-        // Propogate backwards through position list and make
-        //     ray segments smaller. If ray segments disappear,
-        //     then go to next ray segment and delete.
-
         RaycastHit2D[] hitObjects =
             Physics2D.RaycastAll(renderer.GetPosition(0), direction, distance, layerMask);
 
@@ -83,6 +67,7 @@ public class LightningBolt : MonoBehaviour
 
                             if (lifetime <= pickupThreshold)
                             {
+                                ScoringSystem.instance.CollectBolt();
                                 Reset();
                                 return;
                             }
@@ -175,6 +160,7 @@ public class LightningBolt : MonoBehaviour
 
     private void Die()
     {
+        ScoringSystem.instance.BoltDeath();
         Reset();
     }
 

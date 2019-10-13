@@ -27,5 +27,6 @@ public class EnemyController : MonoBehaviour
     public void GetHit()
     {
         gameObject.SetActive(false);
+        ScoringSystem.instance.ScorePoints(transform.position);
     }
 }
