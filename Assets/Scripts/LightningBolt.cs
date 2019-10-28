@@ -36,8 +36,8 @@ public class LightningBolt : MonoBehaviour
     {
         FireRay(Time.deltaTime * speed, new List<Transform>());
         ShortenRay();
-        lifetime -= Time.deltaTime;
 
+        lifetime -= Time.deltaTime;
         if (lifetime < 0.0f)
         {
             Die();
