@@ -21,5 +21,9 @@ public class GameOver : MonoBehaviour
         {
             SceneManager.LoadScene("MainScene");
         }
+        else if(Input.GetButtonDown("Cancel"))
+        {
+            Application.Quit();
+        }
     }
 }
