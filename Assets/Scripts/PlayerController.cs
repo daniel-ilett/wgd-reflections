@@ -21,6 +21,12 @@ public class PlayerController : MonoBehaviour
     private float health;
 
     [SerializeField]
+    private AnimationCurve hurtTintCurve;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
     private LightningBolt lightningBoltPrefab;
 
     private LightningBolt lightningBolt;
@@ -180,9 +186,16 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
+    // Wait for the umminity period and tint the player colour red.
     private IEnumerator WaitForCanBeHit()
     {
-        yield return new WaitForSeconds(immunityPeriod);
+        for (float t = 0.0f; t < immunityPeriod; t += Time.deltaTime)
+        {
+            spriteRenderer.color = Color.Lerp(Color.red, Color.white, t / immunityPeriod);
+            yield return null;
+        }
+
+        spriteRenderer.color = Color.white;
         canBeHit = true;
     }
 }
