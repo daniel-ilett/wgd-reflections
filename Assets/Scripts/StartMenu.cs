@@ -11,5 +11,9 @@ public class StartMenu : MonoBehaviour
         {
             SceneManager.LoadScene("MainScene");
         }
+        else if(Input.GetButtonDown("Cancel"))
+        {
+            Application.Quit();
+        }
     }
 }
